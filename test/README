@@ -1,0 +1,9 @@
+Run All Tests
+  cd PATH/TO/APP
+  phpunit --bootstrap bootstrap.php test
+
+Run Tests in Single File
+  phpunit --bootstrap bootstrap.php --filter UserStoryTest test
+
+Run Single Test
+  phpunit --bootstrap bootstrap.php --filter UserStoryTest::testGet test
