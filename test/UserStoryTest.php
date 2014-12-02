@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @author Leonx
+ * @copyright 2014 NetApp, Inc.
+ * @version 1.0.0
+ */
 class UserStoryTest extends PHPUnit_Framework_TestCase
 {
     private $rally;

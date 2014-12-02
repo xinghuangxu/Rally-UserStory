@@ -8,10 +8,6 @@
  * @version 2.0
  * @author St. John Johnson <stjohn@yahoo-inc.com>  && Leon Xu <xinghuangxu@gmail.com>
 
-
- *
-
-
  */
 class Rally
 {
@@ -88,17 +84,10 @@ class Rally
         // Validate Login was Successful
         $user_data = $this->find('user', "(EmailAddress = \"{$username}\")");
         $security_data = $this->_getSecurityToken('security/authorize');
-        //print_r($security_data);
         // global $token;
         $this->_key = $security_data['SecurityToken'];
-        //print_r($security_data['SecurityToken']);
         $_SESSION['token'] = $security_data['SecurityToken'];
         $x = $_SESSION['token'];
-
-        // echo $_SESSION['token'];
-        // print_r($this->_key);
-        // print_r($this->_key['SecurityToken']);
-        //print_r($user_data);
         $this->_user = $user_data[0];
     }
 
@@ -243,8 +232,6 @@ class Rally
         for (;;) { // I hate infinite loops
             $objects = $this->_get($this->_addWorkspace("{$object}", $params));
             $results = array_merge($results, $objects['Results']);
-            //            print_r("objects:");
-            //            print_r($objects);
             // Continue only if there are more
             if ($objects['TotalResultCount'] > 99 + $params['start']) {
                 $params['start'] += 100;
@@ -255,16 +242,12 @@ class Rally
             // We're done, break
             break;
         }
-        //        print_r("results:");
-        //        print_r($results);
         return $results;
     }
 
     private function _getSecurityToken($object)
     {
         $object = $this->_get($this->_addWorkspace("{$object}"));
-        //        print_r("Security Key:");
-        //        print_r($object);
         return $object;
     }
 
@@ -322,8 +305,6 @@ class Rally
     public function update($object, $id, array $params)
     {
         $url = $this->_addWorkspace($this->getRef($object, $id));
-        //        print_r($url);
-        //        print_r($params);
         $object = $this->_post($url, $params);
         return $object['Object'];
     }
@@ -428,8 +409,6 @@ class Rally
 
         $payload = json_encode(array('Content' => $params));
         $this->_setopt(CURLOPT_POSTFIELDS, $payload);
-        //        print_r("put method:");
-        //        print_r($method);
         return $this->_execute($this->_addKey($method));
     }
 
@@ -524,8 +503,6 @@ class Rally
                 throw new RallyApiWarning(implode(PHP_EOL, $object['Warnings']));
             }
         }
-        //        print_r("ResultObject-Leonx");
-        //        print_r($object);
         return $object;
     }
 
